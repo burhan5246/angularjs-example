@@ -1,0 +1,187 @@
+<div class="container-fluid" id="container">
+  <div class="row page-title-outer">
+    <div class="col-md-6">
+      <h1 class="page-title">{{title}}</h1>
+    </div>
+    <div class="col-md-6 text-right">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#/!">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Fees List</li>
+      </ol>
+    </div>
+  </div>
+  
+  <div class="pt-3 mb-5">
+    <a ng-click="showAddFees()" id="addFees" href="javascript:void(0)" class="btn text-white bg-secondary-primary float-right"><i class="fa fa-plus"></i> Create new Fee</a>
+  </div> 
+
+  <div class="alert alert-danger alert-dismissible fade show" ng-show="hasError">
+    <button type="button" class="close" ng-click="hasError = false;">&times;</button>
+    <strong>Error: </strong> {{errorMessage}}
+  </div>
+   <!----========== Add Fee Form=================-->
+  <div id="outerFeesManageForm">
+    <div class="row bg-light fees-add-form mt-5 pt-3 pb-3">
+      <form name="addfeeform" novalidate>
+        <div class="row pl-3 pr-3">
+          <div class="col-md-12">
+            <h3>Add Fees</h3>
+            <hr/>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label>Extension Name</label>
+              <input type="text" class="form-control" name="extensionname" ng-model="singleFee.name" required>
+              <span class="validation-error" ng-show="addfeeform.extensionname.$touched && addfeeform.extensionname.$invalid">Required</span>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="cost-price">Range 0</label>
+              <input type="number" min="0.1" class="form-control" id="" ng-model="singleFee.range0" name="range0" required> 
+              <span class="validation-error" ng-show="addfeeform.range0.$touched && addfeeform.range0.$invalid">Required</span>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="cost-price">Range 1</label>
+              <input type="number" min="0.1" class="form-control" id="" ng-model="singleFee.range1" name="range1" required>
+              <span class="validation-error" ng-show="addfeeform.range1.$touched && addfeeform.range1.$invalid">Required</span> 
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="cost-price">Range 2</label>
+              <input type="number" min="0.1" class="form-control" id="" ng-model="singleFee.range2" name="range2" required> 
+              <span class="validation-error" ng-show="addfeeform.range2.$touched && addfeeform.range2.$invalid">Required</span>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="cost-price">Range 3</label>
+              <input type="number" min="0.1" class="form-control" id="" ng-model="singleFee.range3" name="range3" required> 
+              <span class="validation-error" ng-show="addfeeform.range3.$touched && addfeeform.range3.$invalid">Required</span>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="cost-price">Range 4</label>
+              <input type="number" min="0.1" class="form-control" id="" ng-model="singleFee.range4" name="range4" required> 
+              <span class="validation-error" ng-show="addfeeform.range4.$touched && addfeeform.range4.$invalid">Required</span>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="cost-price">Range 5</label>
+              <input type="number" min="0.1" class="form-control" id="" ng-model="singleFee.range5" name="range5" required> 
+              <span class="validation-error" ng-show="addfeeform.range5.$touched && addfeeform.range5.$invalid">Required</span>
+            </div>
+          </div>
+          <div class="col-md-1">
+            <div class="form-group">
+              <label for="cost-price">Range 6</label>
+              <input type="number" min="0.1" class="form-control" id="" ng-model="singleFee.range6" name="range6" required> 
+              <span class="validation-error" ng-show="addfeeform.range6.$touched && addfeeform.range6.$invalid">Required</span>
+            </div>
+          </div>
+          <div class="col-md-2">
+            <input ng-click="addFees()" type="submit" value="Add" class="btn btn-primary addformbtn" ng-disabled="!addfeeform.$valid"/>
+            <button type="button" ng-click="cancelForm()" class="btn btn-danger addformbtn">Cancel</button>
+          </div>
+        </div>  
+      </form>
+    </div>
+  </div>  
+
+  <!----===========Listing Fee=================-->
+
+  <div class="table-responsive mt-4">
+    <form name="editfeeform" novalidate>
+      <table class="table feesTable table-fixed" id="myTable" width="100%" cellspacing="0" DataTable style="border:1px solid #ddd">
+        <thead class="thead-light">
+          <tr>
+            <th>Rate ID</th>
+            <th>Name</th>
+            <th>Range 0</th>
+            <th>Range 1</th>
+            <th>Range 2</th>
+            <th>Range 3</th>
+            <th>Range 4</th>
+            <th>Range 5</th>
+            <th>Range 6</th>
+            <th class="text-center">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr ng-repeat="list in feeslist | orderBy:'rate.id':true" ng-include="loadTemplate(list)"></tr>
+        </tbody>
+      </table>
+    </form>
+    <!----===========List View=================-->
+    <script type="text/ng-template" id="view">
+        <td>{{list.rate.id}}</td>
+        <td>{{list.rate.name}}</td>
+        <td ng-repeat="range in list.ranges">{{range.fee.value}}</td>        
+        <td class="text-center">
+           <a href="javascript:void(0)" class="btn btn-sm text-white bg-light-primary" ng-click="editFees(list)"><i class="fa fa-edit"></i> Edit</a>
+        </td>
+    </script>
+    <!----===========Edit View=================-->
+    <script type="text/ng-template" id="edit">
+        <td class="bg-light">{{editablerow.rate.id}}</td>
+        <td class="bg-light">
+          <input type="text" class="form-control" name="feesname" ng-model="editablerow.rate.name" required>
+          <span class="validation-error" ng-show="editfeeform.feesname.$touched && editfeeform.feesname.$invalid"></span>
+        </td>
+
+        <td class="bg-light" ng-repeat="range in editablerow.ranges">
+          <input type="number" min="0.1" class="form-control" name="range0" ng-model="range.fee.value" required>
+          <span class="validation-error" ng-show="editfeeform.range0.$touched && editfeeform.range0.$invalid"></span>
+        </td>
+        
+        <td class="bg-light text-center">
+            <input type="submit" value="Save" class="btn btn-sm text-white bg-light-primary" ng-click="saveFeesData()" ng-disabled="!editfeeform.$valid" >
+            <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
+        </td>
+    </script>
+  </div>
+
+ 
+
+</div>
+
+<div class="modal" id="feeAddModal">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-dark-primary">
+        <h4 class="modal-title text-white">{{modalTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <h5>{{successMessage}}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-light-primary text-white" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cancel -->
+<div class="modal" id="feeCancelModal">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-dark-primary">
+        <h4 class="modal-title text-white">Cancel Changes</h4>
+      </div>
+      <div class="modal-body">
+        <h5>You are going to cancel all changes</h5>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn bg-light-primary text-white" data-dismiss="modal" ng-click="cancelEdit()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

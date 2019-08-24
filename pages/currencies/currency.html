@@ -1,0 +1,164 @@
+<div class="container-fluid">
+  <div class="row page-title-outer">
+    <div class="col-md-6">
+      <h1 class="page-title">{{title}}</h1>
+    </div>
+    <div class="col-md-6 text-right">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#/!">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">Currency List</li>
+      </ol>
+    </div>
+  </div>  
+  
+  <div class="pt-3 mb-5">
+    <a href="javascript:void(0)" class="btn text-white bg-secondary-primary float-right" ng-click="showAddCurrency()"><i class="fa fa-plus"></i> Add Currency</a>
+  </div>
+
+  <div class="alert alert-danger alert-dismissible fade show" ng-show="hasError">
+    <button type="button" class="close" ng-click="hasError = false;">&times;</button>
+    <strong>Error: </strong> {{errorMessage}}
+  </div>
+
+   <!----=========== Add Currency Form=================-->
+
+  <div id="manageCurrencyForm">
+    <div class="form-sec currency-add-form bg-light mt-5">  
+      <form name="addcurrencyform" novalidate>
+        <div class="row p-3"> 
+          <div class="offset-md-2 col-md-8">
+            <div class="row">
+              <div class="col-md-12">
+                <h3>Add Currency</h3>
+                <hr/>
+              </div>
+
+              <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="currency">Currency</label>
+                    <input type="text" class="form-control" id="add-currency" name="addcurrency" ng-model="singleCurrency.currency" required>
+                    <span class="validation-error" ng-show="addcurrencyform.addcurrency.$touched && addcurrencyform.addcurrency.$invalid">Required</span>
+                  </div>
+                </div>  
+
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="chng-euro">Change 1­-1 Euro</label>
+                    <input type="number" min="0.1" class="form-control" id="chng-euro" name="chngeuro" ng-model="singleCurrency.equivalence" required>
+                    <span class="validation-error" ng-show="addcurrencyform.chngeuro.$touched && addcurrencyform.chngeuro.$invalid">Required</span>
+                  </div>
+                </div>
+                
+                <div class="col-md-3">
+                  <div class="form-group">
+                    <label for="currency-description">Description</label>
+                    <input type="text" class="form-control" id="currency-description" name="currencydescription" ng-model="singleCurrency.description" required>
+                    <span class="validation-error" ng-show="addcurrencyform.currencydescription.$touched && addcurrencyform.currencydescription.$invalid">Required</span>
+                  </div>
+                </div>
+
+                <div class="col-md-3">
+                  <div class="text-right pt-4">            
+                    <input ng-click="addCurrency()" type="submit" value="Add" class="btn btn-primary" ng-disabled="!addcurrencyform.$valid"/>
+                    <button class="btn btn-danger" ng-click="cancelForm()">Cancel</button>
+                  </div>
+                </div>
+            </div>
+          </div>
+        </div>
+      </form>    
+    </div>
+  </div>
+
+  <!----===========Listing Currency=================-->
+  <div class="table-responsive mt-4">
+    <form name="editcurrency" novalidate> 
+      <table class="table currency-table table-fixed" width="100%" cellspacing="0" DataTable style="border:1px solid #ddd">
+        <thead class="thead-light">
+          <tr>
+            <th>Currency</th>
+            <th>Change 1-1 Euro</th>
+            <th>Description</th>
+            <th>Update Date</th>
+            <th class="text-center">Action</th>
+          </tr> 
+        </thead>
+        <tbody>
+          <tr ng-repeat="currency in currencylist" ng-include="loadTemplate(currency)"></tr>
+        </tbody>
+      </table>
+    </form>
+    <!----=========== Listing View =================-->
+    <script type="text/ng-template" id="view">
+        <td>
+          {{currency.currency}}
+        </td>
+        <td>{{currency.equivalence}}</td>
+        <td>{{currency.description}}</td>
+        <td> {{currency.updateDate | date }}</td>       
+        <td class="text-center">
+          <a href="javascript:void(0)" class="btn btn-sm text-white bg-light-primary" ng-click="editCurrency($index)"><i class="fa fa-edit"></i> Edit</a>
+        </td>
+    </script>
+    <!----===========Edit View=================-->
+    <script type="text/ng-template" id="edit">         
+        <td class="bg-light">
+          <input type="text" readonly name="editsinglecurrency" ng-model="editablerow.currency" required/>
+          <span class="validation-error" ng-show="editcurrency.editsinglecurrency.$touched && editcurrency.editsinglecurrency.$invalid"></span>
+        </td>
+        <td class="bg-light">
+          <input type="number" min="0.1" name="editchange" ng-model="editablerow.equivalence" required/>
+          <span class="validation-error" ng-show="editcurrency.editchange.$touched && editcurrency.editchange.$invalid"></span>
+        </td>
+        <td class="bg-light">
+          <input type="text" name="editdescription" ng-model="editablerow.description" required/>
+          <span class="validation-error" ng-show="editcurrency.editdescription.$touched && editcurrency.editdescription.$invalid"></span>
+        </td>
+        <td class="bg-light">
+          {{editablerow.updateDate | date }}
+        </td>
+        <td class="bg-light text-center">
+            <input type="submit" value="Save" class="btn btn-sm text-white bg-light-primary" ng-disabled="!editcurrency.$valid" ng-click="saveCurrencyData()">
+            <button class="btn btn-sm btn-danger" ng-click="cancel()">Cancel</button>
+        </td>     
+    </script>
+
+  </div>
+
+</div>
+
+<div class="modal" id="currencyAddModal">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-dark-primary">
+        <h4 class="modal-title text-white">{{modalTitle}}</h4>
+      </div>
+      <div class="modal-body">
+        <h5>{{successMessage}}</h5>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn bg-light-primary text-white" data-dismiss="modal">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Cancel -->
+<div class="modal" id="currencyCancelModal">
+  <div class="modal-dialog modal-dialog-centered modal-md">
+    <div class="modal-content">
+      <div class="modal-header bg-dark-primary">
+        <h4 class="modal-title text-white">Cancel Changes</h4>
+      </div>
+      <div class="modal-body">
+        <h5>You are going to cancel all changes</h5>        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-danger mr-2" data-dismiss="modal">Cancel</button>
+        <button type="button" class="btn bg-light-primary text-white" data-dismiss="modal" ng-click="cancelEdit()">Ok</button>
+      </div>
+    </div>
+  </div>
+</div>

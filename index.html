@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.19/css/jquery.dataTables.css">
+    <!-- <script src="https://kit.fontawesome.com/99829c18bd.js"></script> -->
+    <!-- <link href="assets/css/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css"> -->
+    <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"crossorigin="anonymous">
+    <link href="assets/css/style.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">    
+  </head>
+  <body id="page-top">
+    <div class="loader-outer" ng-if="loader">
+      <div class="loader"></div>
+    </div>
+    <nav class="navbar navbar-expand navbar-dark static-top my-nav">
+      <a class="navbar-brand mr-1" href="index.html">Domain - Dashboard</a>
+      <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
+        <i class="fa fa-bars"></i>
+      </button>
+    </nav>
+    <div id="wrapper">
+      <!-- Sidebar -->
+      <ul class="sidebar navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#/!">
+            <i class="fa fa fa-tachometer"></i>
+            <span>Dashboard</span>
+          </a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!extensions">
+            <i class="fa fa-exchange"></i>
+            <span>Extensions List</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!fees">
+            <i class="fa fa-list"></i>
+            <span>Fees List</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#!currencies">
+            <i class="fa fa-usd"></i>
+            <span>Currencies List</span></a>
+        </li>
+      </ul>
+      <!--.content-wrapper -->
+      <div id="content-wrapper">
+        <ng-view></ng-view>
+        <!-- Sticky Footer -->
+        <!-- <footer class="sticky-footer">
+          <div class="container my-auto">
+            <div class="copyright text-center my-auto">
+              <span>Copyright © Domain 2019</span>
+            </div>
+          </div>
+        </footer> -->
+      </div>
+      <!-- /.content-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+            <a class="btn btn-primary" href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- <script src="assets/js/jquery-easing/jquery.easing.min.js"></script> -->
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.js"></script>
+    <script src="assets/js/custom.js"></script>
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular-route.js"></script>    
+    <script src="assets/js/dirPagination.js"></script>  
+    <script src="assets/js/app.js"></script>
+    <script src="assets/js/apiservices.js"></script>
+    <script src="pages/fees/fees.js"></script>
+    <script src="pages/currencies/currency.js"></script>
+    <script src="pages/dashboard/dashboard.js"></script>    
+    <script src="pages/extensions/extensions.js"></script>
+    <script src="pages/extensions/extensionupdate.js"></script>
+    <script src="pages/extensions/extensioncreate.js"></script>
+    <script src="pages/extensions/manage-price.js"></script>
+  </body>
+</html>

@@ -1,0 +1,101 @@
+:root{
+	--primary-color: #00238e!important;
+	--primary-medium-color: #4e73df!important;
+	--primary-light-color: rgb(77, 113, 222)!important;
+	--secondary-color: #41c98d!important;
+}
+
+.bg-light-primary{background-color: var(--primary-light-color);}
+.bg-dark-primary{background-color: var(--primary-color);}
+.bg-secondary-primary{background-color: var(--secondary-color);}
+.button{
+	display: inline-block;    font-weight: 400;    color: #212529;    text-align: center;    vertical-align: middle;
+    -webkit-user-select: none;    -moz-user-select: none;    -ms-user-select: none;    user-select: none;    background-color: transparent;
+    border: 1px solid transparent;    padding: .375rem .75rem;    font-size: 1rem;    line-height: 1.5;    border-radius: .25rem;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out;
+}
+.loader-outer{position: fixed;top:0;left:0;right:0;bottom:0;background: rgba(0,0,0,0.7);width:100%;height: 100vh;z-index: 9999}
+.loader-outer .loader {
+  border: 10px solid #f3f3f3;   border-top: 10px solid #00238e;  border-radius: 50%;  width: 75px;  height: 75px;  
+  animation: spin 2s linear infinite;  position: absolute;  top:45%;  left:45%;  transform: translateX(-50%) translateY(-50%);
+}
+@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); }}
+.breadcrumb{justify-content: flex-end;background-color: transparent !important;}
+.page-title-outer{border-bottom: 1px solid #ddd}
+.page-title-outer .page-title{font-size: 35px;color:#333;}
+.toggle-icon{font-size: 24px;color: var(--secondary-color);}
+.btn.toggle-icon:hover, .btn.toggle-icon:active, .btn.toggle-icon:focus, .btn.toggle-icon:visited{border:none !important;box-shadow: none !important}
+.price-form.inner-form{margin:0 auto;background: #f9f9f9;border:.5px solid #ddd;width:60%;}
+.inner-form{margin:0 auto;background: #f9f9f9;border:.5px solid #ddd;}
+.inner-form input[type="text"], .inner-form input[type="number"], .inner-form input[type="email"], .inner-form select{
+	height: 35px;background: #fff;border: .5px solid #ddd;outline: none;box-shadow: none;border-left: 3px solid var(--primary-color);border-radius: 0;font-size: 16px;margin-bottom: 5px;color:#333;
+}
+.inner-form input[type="text"]:focus, .inner-form input[type="number"]:focus, .inner-form input[type="email"]:focus{box-shadow: none !important}
+.inner-form select:focus, .inner-form select:active, .inner-form select:hover{box-shadow: none !important; border:none !important;border-left: 2px solid var(--primary-color) !important;}
+.inner-form label{font-size: 13px;color:#797979;font-weight: 600;text-transform: uppercase;}
+.inner-form.extension-form, .inner-form.currency-form{width: 600px;}
+.form-divider-row{margin-bottom: 20px;padding-bottom: 20px;border-bottom: 1px solid #ddd;}
+.form-divider-row h4{margin-bottom: 20px;}
+.calculation-result{padding: 25px;background: #fff;margin-top: 20px;border:1px solid #ddd;font-size: 13px;}
+.calculation-result h4{margin-bottom: 20px;}
+.validation-error{color:red;font-weight: 600;font-size: 12px}
+.modal-body h5{color:#333;margin:10px;} 
+.search-input:focus, .search-input:hover, .search-input:visited, .search-input:active{box-shadow: none !important;}
+.currency-add-form, .fees-add-form{overflow: hidden;transition: max-height 5s ease-out;}
+.currency-add-form label, .fees-add-form label{color:#333;font-size: 13px;}
+.currency-add-form input[type="text"], .currency-add-form input[type="number"], .fees-add-form input[type="text"], .fees-add-form input[type="number"]{
+    border: .5px solid #ddd;box-shadow: none;height: 40px;border-radius: 0;
+}
+.addformbtn{display: block;width: 100%}
+.addformbtn:nth-child(1), .addformbtn:nth-child(2){margin-bottom: 10px;}
+.currency-table td{width:20%;}
+.currency-table input[type="text"], .currency-table input[type="number"]{
+  padding-left: 5px;  border-radius: 0;  border: 0.5px solid #ddd;  box-shadow: none;  outline: none;  margin-left: -5px;min-height: 35px;
+}
+.currency-table input[type="text"]:focus, .currency-table input[type="number"]:focus{ box-shadow: none;  outline: none;}
+.feesTable th, .feesTable td{width:9%;}
+.feesTable th:first-child, .feesTable td:first-child{width:9%;}
+.feesTable th:nth-child(2), .feesTable td:nth-child(2){width:18%;}
+.feesTable th:last-child, .feesTable td:last-child{width:10%;}
+.feesTable input[type="text"], .feesTable input[type="number"]{
+  padding-left: 5px;  border-radius: 0;  border: 0.5px solid #ddd;  box-shadow: none;  outline: none;  margin-left: -5px;min-height: 35px;
+}
+.feesTable input[type="text"]:focus, .feesTable input[type="number"]:focus{ box-shadow: none;  outline: none;}
+table.table-fixed {display: flex;flex-flow: column; width: 100%;}
+table.table-fixed thead { flex: 0 0 auto;}
+table.table-fixed tbody { flex: 1 1 auto;  display: block; overflow-y: auto; overflow-x: hidden; max-height: 63.5vh;height: auto}
+table.table-fixed tr { width: 100%;  display: table;  table-layout: fixed;}
+table.table-fixed tbody::-webkit-scrollbar {width: 5px;}
+table.table-fixed tbody::-webkit-scrollbar-track { background: #f1f1f1; }
+table.table-fixed tbody::-webkit-scrollbar-thumb {background: rgb(175,175,175); }
+table.table-fixed tbody::-webkit-scrollbar-thumb:hover {background: rgb(150,150,150); }
+.fees-add-form, .currency-add-form{display: none;}
+input[type="text"].ng-touched.ng-invalid,
+input[type="number"].ng-touched.ng-invalid,
+input[type="text"].ng-dirty,
+input[type="number"].ng-dirty{border-color:red !important;}
+
+input[type="text"].ng-valid, input[type="number"].ng-valid{border-color:#ddd !important;}
+input[type="number"]{padding-right: 1px}
+input[type="submit"]:disabled {cursor: no-drop;}
+
+.pagination{float: right;}
+.pagination li{margin: 0 4px;font-size: 16px;border-radius: 4px;}
+.pagination li a{color:#000;padding: 2px 8px;}
+.pagination li a:hover,.pagination li a:active,.pagination li a:visited{text-decoration: none;color:#000;}
+.pagination li.directionLinks a{color:var(--primary-light-color);}
+.pagination li.active{background:  var(--primary-light-color);box-shadow:inset 0 0 5px rgba(0, 35, 141, 0.61);}
+.pagination li.active a{color:#fff;}
+
+@media only screen and (max-width: 1440px) {
+  .feesTable th, .feesTable td{width:8.2%;}
+  .feesTable th:last-child, .feesTable td:last-child{width:18%;}
+  .feesTable input[type="text"], .feesTable input[type="number"], .feesTable{font-size: 13px;}
+  .currency-table input[type="text"], .currency-table input[type="number"], .currency-table{font-size: 13px;}
+  .price-form.inner-form{width:80%;}
+}
+@media only screen and (max-width: 1280px) {
+   .price-form.inner-form{width:90%;}
+}
+
+/**/

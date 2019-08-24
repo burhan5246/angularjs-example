@@ -1,0 +1,110 @@
+<div class="container-fluid">
+  <div class="row page-title-outer">
+  	<div class="col-md-6">
+  		<h1 class="page-title">{{title}}</h1>
+  	</div>
+  	<div class="col-md-6 text-right">
+  		<!-- Breadcrumbs-->
+	  	<ol class="breadcrumb">
+	    	<li class="breadcrumb-item">
+	      		<a href="#/!">Dashboard</a>
+	    	</li>
+	    	<li class="breadcrumb-item active">Extension List</li>
+	  	</ol>
+  	</div>
+  </div>
+  
+  <div class="mt-3 mb-2">
+    <div class="row">
+      <div class="col-md-4">
+        <div class="input-group mb-3">
+          <input type="text" class="form-control search-input" ng-model="searchextension" placeholder="Search..." aria-label="Recipient's username" aria-describedby="basic-addon2">
+        </div>
+      </div>
+      <div class="col-md-8 text-right">
+         <a href="#!domains/add/{{maxId}}" class="btn text-white bg-secondary-primary"><i class="fa fa-plus"></i> Create new extension</a>
+      </div>
+    </div>   
+  </div>
+
+  <!----===========Listing Extension=================-->
+  <div class="alert alert-danger alert-dismissible fade show" ng-show="hasError">
+    <button type="button" class="close" ng-click="hasError = false;">&times;</button>
+    <strong>Error: </strong> {{errorMessage}}
+  </div>
+
+  <div class="table-responsive mt-2" ng-init="info = false">
+    <dir-pagination-controls max-size="7"></dir-pagination-controls>
+    <table class="table" id="myTable" width="100%" cellspacing="0" style="border:1px solid #ddd">
+      <thead class="thead-light">
+        <tr>
+          <th>ID</th>
+          <th>Extension</th>
+          <th>Registry Backend</th>
+          <th class="text-center">Action</th>
+        </tr>
+      </thead>
+      <tbody dir-paginate="list in extensionlist | filter : searchextension | itemsPerPage: 10"> 
+        <tr>
+          <td>{{list.id}}</td>
+          <td>{{list.name}}</td>
+          <td>{{list.registry.name}}</td> 
+          <td class="text-center">
+            <a href="#!prices/edit/{{list.id}}" class="btn btn-sm text-white bg-light-primary"><i class="fa fa-edit"></i> Edit Price</a>
+            <a href="#!domains/edit/{{list.id}}" class="btn btn-sm text-white bg-light-primary"><i class="fa fa-edit"></i> Edit Domain</a>            
+            <a href="javascript:void(0)" class="button toggle-icon ml-3" ng-click="info = !info; getFeeCost(list.id)">
+              <i ng-if="!info" class="fa fa-chevron-circle-down" ></i>
+              <i ng-if="info" class="fa fa-chevron-circle-up"></i>
+            </a>
+          </td>
+
+        </tr>
+        <tr ng-show="info">
+          <td colspan="4" class="bg-light pt-4 pb-4">
+            <table class="table table-bordered table-dark " style="width:75%;margin:0 auto">
+              <thead>
+                <th></th>
+                <th>Create</th>
+                <th>Renew</th>
+                <th>Transfer</th>
+                <th>Restore</th>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Cost </td>
+                  <td>{{costs[list.id].costNewValue}}</td>
+                  <td>{{costs[list.id].costRenewValue}}</td>
+                  <td>{{costs[list.id].costTransferValue}}</td>
+                  <td>{{costs[list.id].costRedemptionValue}}</td>
+                </tr>
+                <tr>
+                  <td>Fee</td>
+                  <td>{{costs[list.id].feeNewName}}</td>
+                  <td>{{costs[list.id].feeRenewName}}</td>
+                  <td>{{costs[list.id].feeTransferName}}</td>
+                  <td>{{costs[list.id].feeRedemptionName}}</td>
+                </tr>
+                <tr>
+                  <td>Cost Preview EUR </td>
+                  <td>{{costs[list.id].EurNewValue}}</td>
+                  <td>{{costs[list.id].EurRenewValue}}</td>
+                  <td>{{costs[list.id].EurTransferValue}}</td>
+                  <td>{{costs[list.id].EurRedemptionValue}}</td>
+                </tr>
+                <tr>
+                  <td>Final Price EUR range  </td>
+                  <td>{{costs[list.id].pvpNewValue}}</td>
+                  <td>{{costs[list.id].pvpRenewValue}}</td>
+                  <td>{{costs[list.id].pvpTransferValue}}</td>
+                  <td>{{costs[list.id].pvpRedemptionValue}}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>        
+      </tbody>
+    </table>
+    <dir-pagination-controls max-size="7"></dir-pagination-controls>
+  </div>
+
+</div>
